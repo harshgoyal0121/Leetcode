@@ -95,6 +95,7 @@ Node* deleteNode(Node *head,int x)
         y++;
         temp=temp->next;
     }
+    
     while(temp && temp->next){
         temp->data=temp->next->data;
         temp=temp->next;
