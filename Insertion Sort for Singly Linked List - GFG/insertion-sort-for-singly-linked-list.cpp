@@ -51,14 +51,8 @@ class Solution
         Node *t1 = head;
         while(t1){
             Node *t2=head;
-            while(t2){
-                if(t2->data <= t1->data) {
-                    Node *temp=t1;
-                    while(temp && temp->data > t2->data){
-                        temp=temp->next;
-                    }
-                }
-                else{
+            while(t2 && t2!=t1){
+                if (t2->data > t1->data){
                     int x=t1->data;
                     t1->data=t2->data;
                     t2->data=x;
