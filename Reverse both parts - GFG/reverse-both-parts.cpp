@@ -64,8 +64,7 @@ struct Node
 */
 
 
-class Solution
-{
+class Solution{
 public:
    Node *rev(Node *curr){
        Node *prev = NULL, *temp=NULL;
@@ -77,20 +76,8 @@ public:
         }
         return prev;
    }
-   int len(Node *head){
-       int size=0;
-       while(head){
-           head=head->next;
-           size++;
-       }
-       return size;
-   }
     Node *reverse(Node *head, int k)
     {
-        // code here
-        int size = len(head);
-        if(k>size)  return head;
-        
         Node *temp = head, *a= new Node(0);
         Node *p =a;
         while(temp && k-->0){
