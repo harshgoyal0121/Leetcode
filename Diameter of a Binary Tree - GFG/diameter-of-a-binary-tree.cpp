@@ -93,25 +93,17 @@ struct Node
 
 class Solution {
   public:
-  int height(Node *root){
+  int maxPath(int &len, Node *root){
       if(!root) return 0;
-      int x = height(root->left);
-      int y = height(root->right);
-      
+      int x = maxPath(len, root->left);
+      int y = maxPath(len, root->right);
+      len = max(len, x+y+1);
       return max(x, y)+1;
-  }
-  void dfs(int &len, Node *root){
-      if(!root) return;
-      int l = height(root->left);
-      int r = height(root->right);
-      len = max(len, l+r+1);
-      dfs(len, root->left);
-      dfs(len, root->right);
   }
     // Function to return the diameter of a Binary Tree.
     int diameter(Node* root) {
         int len=0;
-        dfs(len, root);
+        maxPath(len, root);
         return len;
     }
 };
