@@ -100,10 +100,7 @@ class Solution
     
     bool isTrue(int &flag, Node *r1, Node*s){
         if(!r1 && !s)  return true;
-        if((!r1 && s) || (r1 && !s)){
-            flag=0;
-            return false;
-        }  
+        if((!r1 && s) || (r1 && !s))   return false;
         if(r1->data != s->data) {
             flag=0;
             return false;
@@ -124,7 +121,7 @@ class Solution
             }
             else{
                 int flag=1;
-                if(isTrue(flag, temp, s)==true && flag==1)   return true;
+                if(isTrue(flag, temp, s) && flag==1)   return true;
                 if(temp->left) q.push(temp->left);
                 if(temp->right) q.push(temp->right);
             }
