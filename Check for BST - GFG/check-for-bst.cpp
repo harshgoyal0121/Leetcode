@@ -23,17 +23,33 @@ class Solution
 {
     public:
     //Function to check whether a Binary Tree is BST or not.
-    bool dfs(long min, long max, Node *root){
+    // bool dfs(long min, long max, Node *root){
+    //     if(!root)   return true;
+    //     if(root->data <= min  || root->data >=max){
+    //         return false;
+    //     }
+    //     return dfs(min, root->data, root->left) && dfs(root->data, max, root->right);
+    // }
+    // bool isBST(Node* root) 
+    // {
+    //     return dfs(INT_MIN, INT_MAX, root);
+    // }
+    int flag=1;
+    bool in(Node *root, Node*&prev){
         if(!root)   return true;
-        if(root->data <= min  || root->data >=max){
+        in(root->left, prev);
+        if(prev && prev->data >= root->data) {
+            flag=0;
             return false;
         }
-        return dfs(min, root->data, root->left) && dfs(root->data, max, root->right);
-        // return true;
+        prev=root;
+        in(root->right, prev);
     }
-    bool isBST(Node* root) 
-    {
-        return dfs(INT_MIN, INT_MAX, root);
+    bool isBST(Node* root) {
+        if(!root)   return true;
+        Node *prev=NULL;
+        in(root, prev);
+        return flag;
     }
 };
 
