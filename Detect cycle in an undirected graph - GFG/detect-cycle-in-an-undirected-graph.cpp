@@ -5,13 +5,14 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
+  /*      by bfs        */
     bool detect(int src, vector<int>adj[], int vis[]){
-        queue<pair<int, int>> q;
-        q.push({src, -1});
         vis[src]=1;
+        queue<pair<int, int>>q;
+        q.push({src, -1});
         
         while(!q.empty()){
-            int curr = q.front().first;
+            int curr=q.front().first;
             int parent = q.front().second;
             q.pop();
             for(auto it: adj[curr]){
@@ -19,24 +20,22 @@ class Solution {
                     vis[it]=1;
                     q.push({it, curr});
                 }
-                else if(vis[it]==1 && it!=parent){
+                else if(it != parent){
                     return true;
                 }
             }
-            
         }
     }
     // Function to detect cycle in an undirected graph.
     bool isCycle(int v, vector<int> adj[]) {
         // Code here
         int vis[v]={0};
-        for(int i =0; i<v; i++){
+        for(int i=0; i<v; i++){
             if(!vis[i]){
                 if(detect(i, adj, vis)==true)   return true;
             }
         }
         return false;
-        
     }
 };
 
