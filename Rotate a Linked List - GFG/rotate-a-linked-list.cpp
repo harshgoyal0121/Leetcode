@@ -38,18 +38,24 @@ class Solution
             temp=temp->next;
             size++;
         }
-        if(size==k){
-            return head;
-        }
+        if(size==k)  return head;
         temp->next=head;
         k=size-k;
-        if(k %= size){
-            for(auto i=0; i<size-k; i++)
-                temp = temp->next; // the tail node is the (len-k)-th node (1st node is head) 
-        }
+        if(k %= size)
+            for(auto i=0; i<size-k; i++) temp = temp->next;
         Node* Nhead=temp->next;
         temp->next=NULL;
         return Nhead;
+        // Node *temp = head;
+        // for(int i=0;i<k-1;i++)    temp = temp->next;
+        // if(temp->next == NULL) return head;
+
+        // Node *ans = temp->next;
+        // Node *end = temp;
+        // while(temp->next!=NULL) temp=temp->next;
+        // temp->next=head;
+        // end->next=NULL;
+        // return ans;
     }
 };
 
