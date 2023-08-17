@@ -7,43 +7,43 @@ class Solution
 {
     public:
     //Function to find distance of nearest 1 in the grid for each cell.
-
 	vector<vector<int>>nearest(vector<vector<int>>grid)
 	{
+	    // Code here
 	    int n = grid.size();
 	    int m = grid[0].size();
-	    queue<pair<pair<int, int>, int>> q;
-	    vector<vector<int>> vis(n, vector<int>(m, 0));
-	    vector<vector<int>>ans(n, vector<int>(m, 0));
+	    
+	    vector<vector<int>>vis(n, vector<int>(m, -1));
+	    vector<vector<int>>ans(n, vector<int>(m, -1));
+	    queue<pair<pair<int, int>, int>>q;
+	    
 	    for(int i=0; i<n; i++){
 	        for(int j=0; j<m; j++){
-	            if(!vis[i][j] && grid[i][j]==1){
-	                vis[i][j]=0;
-                    q.push({{i, j}, 0});    
-	            }
-	            else{
-	                vis[i][j]=0;
+	            if(grid[i][j]==1){
+	                vis[i][j]=1;
+	                q.push({{i, j}, 0});
 	            }
 	        }
 	    }
-	    int delrow[4]={-1, 0, 1, 0};
-        int delcol[4]={0, 1, 0, -1};
-        while(!q.empty()){
-            int r = q.front().first.first;
-            int c = q.front().first.second;
-            int dis = q.front().second;
-            q.pop();
-            ans[r][c]=dis;
-            for(int x = 0; x<4; x++){
-                int nrow=r+delrow[x];
-                int ncol = c+delcol[x];
-                if(nrow<n && ncol<m && nrow>=0 && ncol>=0 && !vis[nrow][ncol] && grid[nrow][ncol]==0){
-                    vis[nrow][ncol]=1;
-                    q.push({{nrow, ncol}, dis+1});
-                }
-            }
-        }
-        return ans;
+	    int delrow[] = {-1, 0, 1, 0};
+	    int delcol[] = {0, 1, 0, -1};
+	    while(!q.empty()){
+	        int r = q.front().first.first;
+	        int c= q.front().first.second;
+	        int dis = q.front().second;
+	        q.pop();
+	        ans[r][c]=dis;
+	        for(int i=0; i<4; i++){
+	            int dx= r+delrow[i];
+	            int dy = c+delcol[i];
+	            if(dx>=0 && dy>=0 && dx<n && dy<m && vis[dx][dy]==-1){
+	                vis[dx][dy]=1;
+	                q.push({{dx, dy}, dis+1});
+	            }
+	        }
+	    }
+	    return ans;
+	    
 	}
 };
 
